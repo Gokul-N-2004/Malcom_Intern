@@ -1,2 +1,2 @@
 # Malcom_Intern
-This is the Internship for the Malcom Comapny.
+This is the Frontend for the Malcom Comapny Internship in Web Development Domain.
