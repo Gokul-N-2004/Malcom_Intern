@@ -3,36 +3,6 @@ import React from "react";
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-black text-white font-mono">
-      <nav className="border-b border-blue-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex-shrink-0">
-              <a href="/" className="block">
-                <img
-                  src="/malcom-logo.png"
-                  alt="Malcom"
-                  className="h-8 w-auto"
-                />
-              </a>
-            </div>
-            <div className="flex space-x-8">
-              <a href="/" className="text-gray-300 hover:text-white">
-                Home
-              </a>
-              <a href="/about" className="text-pink-500 hover:text-pink-400">
-                About Us
-              </a>
-              <a href="/careers" className="text-gray-300 hover:text-white">
-                Careers
-              </a>
-              <a href="/contact" className="text-gray-300 hover:text-white">
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h1 className="text-4xl font-bold text-center mb-16">About Us</h1>
 
