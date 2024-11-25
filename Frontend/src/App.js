@@ -1,14 +1,28 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AboutPage from "./AboutPage"; //import AboutPage from "./aboutpage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AboutPage from "./AboutPage";
+import RegistrationForm from "./RegistrationForm";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Gokul N</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/registration" element={<RegistrationForm />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-export default AboutPage;
+const HomePage = () => {
+  return (
+    <div>
+      <h1>Gokul N</h1>
+    </div>
+  );
+};
+
+export default App;
