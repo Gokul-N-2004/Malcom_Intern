@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function RegistrationForm() {
   const handleSubmit = (e) => {
@@ -9,27 +10,6 @@ function RegistrationForm() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
-      <nav className="bg-black/90 p-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold">
-            MALCOM
-          </a>
-          <div className="space-x-6">
-            <a href="/" className="hover:text-gray-300">
-              Home
-            </a>
-            <a href="/about" className="hover:text-gray-300">
-              About Us
-            </a>
-            <a href="/careers" className="text-pink-500 hover:text-pink-400">
-              Careers
-            </a>
-            <a href="/contact" className="hover:text-gray-300">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </nav>
 
       {/* Main Content */}
       <main className="max-w-2xl mx-auto px-4 py-16">
