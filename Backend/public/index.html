@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Sample Web Page
+        </title>
+    </head>
+    <body>
+        <h1>Malcom Web Page forms</h1>
+        <form id="application_form" action="/add" method="post">
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="mail_id">Mail ID: </label>
+            <input type="email" id="mail_id" name="mail_id" required><br>
+            <label for="dob">DOB: </label>
+            <input type="date" id="dob" name="dob" required><br>
+            <label for="known_skills">Known Skills: </label>
+            <input type="text" id="known_skills" name="known_skills" required><br>
+            <label for="mobile_no">Mobile Number: </label>
+            <input type="tel" id="mobile_no" name="mobile_no" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required><br>
+            <button type="submit" id="add_btn">Submit</button>
+        </form>
+        <script src="script.js"></script>
+    </body>
+</html>
