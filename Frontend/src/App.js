@@ -1,10 +1,11 @@
-
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AboutPage from "./AboutPage";
+import uiuxPage from "./Components/uiuxPage";
+import FendDevPage from "./Components/FendDevPage";
+import BendDevPage from "./Components/BendDevPage";
+import PCBDesPage from "./Components/PCBDesPage";
 import RegistrationForm from "./RegistrationForm";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 import First from "./Components/First";
 import Services from "./Components/Services";
@@ -21,6 +22,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/registration" element={<RegistrationForm />} />
+          <Route path="/aboutpage" element={<AboutPage />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/chooseus" element={<ChooseUs />} />
+          <Route path="/invest" element={<Invest />} />
         </Routes>
       </div>
     </Router>
@@ -30,34 +35,15 @@ function App() {
 const HomePage = () => {
   return (
     <div>
-      <h1>Gokul N</h1>
-    </div>
       <div style={{ overflowX: "hidden" }}>
         <Navigation />
-
-        <Routes>
-          {/* Update the path for the home page to "/" */}
-          <Route
-            path="/"
-            element={
-              <>
-                <First />
-                <Services />
-                <ChooseUs />
-                <Invest />
-              </>
-            }
-          />
-          {/* Define routes for other pages */}
-          <Route path="/aboutpage" element={<AboutPage />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/chooseus" element={<ChooseUs />} />
-          <Route path="/invest" element={<Invest />} />
-        </Routes>
-
+        <First />
+        <Services />
+        <ChooseUs />
+        <Invest />
         {/* <Footer /> */}
       </div>
-    </Router>
+    </div>
   );
 };
 
