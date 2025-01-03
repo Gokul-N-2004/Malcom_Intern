@@ -1,6 +1,6 @@
 var express = require("express")
 var bodyParser = require("body-parser")
-var mongoose = require("mongoose")
+var mysql = require('mysql2')
 var nodeMailer = require("nodemailer")
 
 const app= express()
@@ -10,66 +10,76 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-mongoose.connect('mongodb+srv://shankarsr:mAlCoM@malcomsamplecluster.nwava.mongodb.net/?retryWrites=true&w=majority&appName=MalcomSampleCluster')
-var db = mongoose.connection
-db.on('error', ()=> console.log("Error in connecting to the Database"))
-db.once('open', () => console.log("Connected to Database"))
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'Srsrprlvr@79',
+  database: 'applications',
+});
 
-app.post("/add", (req, res) =>{
-    var name = req.body.name
-    var mail_id= req.body.mail_id
-    var dob = req.body.dob
-    var known_skills = req.body.known_skills
-    var mobile_no = req.body.mobile_no
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+    return;
+  }
+  console.log('Connected to MySQL!');
+});
 
-    var data={
-        "Name": name,
-        "MailID" : mail_id,
-        "DOB": dob,
-        "KnownSkills": known_skills,
-        "MobileNo": mobile_no
-    }
-    db.collection('apps').insertOne(data, (err,collection) => {
-        if(err){
-            throw err;
-        }
-        console.log("Record Inserted Successfully")
-    })
-    var transporter = nodeMailer.createTransport({
+app.post("/add", (req, res) => {
+  const query = 'INSERT INTO applicants (Name, MailID, DOB, KnownSkills, MobileNo) VALUES (?, ?, ?, ?, ?)';
+  const { name, mail_id, dob, known_skills, mobile_no } = req.body;
+
+  // Log the request body for debugging
+  console.log("Request body:", req.body);
+
+  // Validate the input to ensure data is not empty
+  if (!name || !mail_id || !dob || !known_skills || !mobile_no) {
+    console.log("Validation failed: Missing fields");
+    return res.status(400).send("Fill all the fields.");
+  }
+
+  // Execute the query with proper bindings
+  connection.query(query, [name, mail_id, dob, known_skills, mobile_no], (err, results) => {
+    if (err) {
+      console.error("Error inserting data:", err);
+      res.status(500).send("An error occurred while saving your data.");
+      return; // Exit the handler to ensure email logic is not executed
+    } else {
+      res.send("Thank you for submitting your application!!");
+      console.log('Data inserted:', results);
+      sendEmail(name, mail_id, dob, known_skills, mobile_no); // Only executed on success
+    }    
+  });
+
+  // Email logic extracted into a separate function
+  function sendEmail(name, mail_id, dob, known_skills, mobile_no) {
+    const transporter = nodeMailer.createTransport({
       host: "smtp.gmail.com",
-      secure: true, 
-      secureConnection: false,
-      tls: {
-         ciphers: "SSLv3",
-      },
-      requireTLS: true,
       port: 465,
-      debug: true,
-      connectionTimeout: 10000,
+      secure: true,
       auth: {
-          user: 'dummy00241@gmail.com',
-          pass: 'lbct qwnf bpte fhnc'
+        user: 'dummy00241@gmail.com',
+        pass: 'lbct qwnf bpte fhnc',
+      },
+    });
+
+    const mailOptions = {
+      from: 'dummy00241@gmail.com',
+      to: 'srshankar79@gmail.com',
+      subject: 'New Application received!!',
+      text: `A new application has been submitted:\nName: ${name}\nMailID: ${mail_id}\nDOB: ${dob}\nKnown Skills: ${known_skills}\nMobile No: ${mobile_no}`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Email sending failed:", error);
+      } else {
+        console.log('Email sent:', info.response);
       }
     });
-      
-      var mailOptions = {
-        from: 'dummy00241@gmail.com',
-        to: 'srshankar79@gmail.com',
-        subject: 'New Application received!!',
-        text: `A new application has been submitted:\nName: ${name}\nMailID: ${mail_id}\nDOB: ${dob}\nKnown Skills: ${known_skills}\nMobile No: ${mobile_no}`
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-          return true;
-        } else {
-          console.log('Email sent: ' + info.response);
-          return false;
-        }
-      });
-      res.send("Your response has been recorded!!")
-})
+  }
+});
+
 
 app.get("/",(req,res) =>{
     res.set({
