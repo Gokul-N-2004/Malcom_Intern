@@ -1,20 +1,16 @@
-document.getElementById('add_btn').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+document.getElementById('application_form').addEventListener('submit', function (event) {
+    const form = event.target;
 
-    const name = document.getElementById('name').value;
-    const mail_id = document.getElementById('mail_id').value;
-    const dob = document.getElementById('dob').value;
-    const known_skills = document.getElementById('known_skills').value;
-    const mobile_no = document.getElementById('mobile_no').value;
+    const name = form.name.value;
+    const mail_id = form.mail_id.value;
+    const dob = form.dob.value;
+    const known_skills = form.known_skills.value;
+    const mobile_no = form.mobile_no.value;
 
     // Validate the inputs
     if (!name || !mail_id || !dob || !known_skills || !mobile_no) {
+        event.preventDefault(); // Prevent the form from submitting
         alert('Please fill out all fields');
         return;
     }
-
-    // Submit the form using the default form action
-    alert('Data submitted successfully!');
-    document.querySelector('form').submit(); // Submit the form
-    document.querySelector('form').reset(); // Reset the form to its initial state
 });
