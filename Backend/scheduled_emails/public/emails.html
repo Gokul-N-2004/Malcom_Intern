@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Newsletter page
+        </title>
+    </head>
+    <body>
+        <h1>This is the official newsletter page for malcom</h1>
+        <form id="send_email" action="/send" method="post">
+            <label for="heading">Title of the Newsletter: </label>
+            <input type="text" id="heading" name="heading" required><br>
+            <label for="content">Give the content of the newsletter: </label>
+            <textarea id="content" name="content" required></textarea>
+            <button type="submit" id="send_btn">Send</button>
+        </form>
+        <script src="emails.js"></script>
+    </body>
+</html>
