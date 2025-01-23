@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import uiuxPage from "./Components/uiuxPage";
+import UiUxPage from "./Components/UiuxPage";
 import FendDevPage from "./Components/FendDevPage";
 import BendDevPage from "./Components/BendDevPage";
 import PCBDesPage from "./Components/PCBDesPage";
